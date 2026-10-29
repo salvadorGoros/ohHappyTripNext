@@ -9,6 +9,7 @@ const navLinks = [
     { href: "/#promociones", label: "Promociones", id: "promociones" },
     { href: "/#nosotros", label: "Nosotros", id: "nosotros" },
     { href: "/#testimonios", label: "Testimonios", id: "testimonios" },
+    { href: "/#HazteAgente", label: "Hazte Agente", id: "HazteAgente" },
 ];
 
 export default function Navbar() {
