@@ -3,6 +3,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --navbar-bg: #ffffff;
 }
 
 @theme inline {
@@ -14,13 +15,134 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #fcfcfc;
     --foreground: #ededed;
   }
 }
 
 body {
   background: var(--background);
-  color: var(--foreground);
+  color: #000000;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.hero-bg {
+  background:
+    radial-gradient(ellipse at 50% 35%, rgba(220, 234, 255, 0.72), transparent 55%),
+    radial-gradient(ellipse at 85% 75%, rgba(255, 243, 214, 0.68), transparent 35%),
+    linear-gradient(rgba(248, 249, 255, 0.65), rgba(242, 245, 255, 0.65)),
+    url("/img/fondo_disney.jpg") center / cover no-repeat;
+}
+.navbar-bg {
+  background:
+    radial-gradient(ellipse at 10% 50%, #e8f2ff 0%, transparent 45%),
+    radial-gradient(ellipse at 90% 50%, #fff2d6 0%, transparent 40%),
+    linear-gradient(90deg, #ffffff 0%, #f8fbff 50%, #ffffff 100%);
+}
+
+.destination-carousel-track {
+  width: 1000%;
+  animation: destination-carousel 17.5s linear infinite;
+}
+
+@keyframes destination-carousel {
+  0%, 17.1429% { transform: translateX(0); }
+  20%, 37.1429% { transform: translateX(-10%); }
+  40%, 57.1429% { transform: translateX(-20%); }
+  60%, 77.1429% { transform: translateX(-30%); }
+  80%, 97.1429% { transform: translateX(-40%); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .destination-carousel-track {
+    animation-name: destination-carousel-reduced-motion;
+    animation-duration: 15s;
+    animation-timing-function: steps(5, end);
+  }
+}
+
+@keyframes destination-carousel-reduced-motion {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.mobile-menu-close,
+.mobile-navigation[open] .mobile-menu-open {
+  display: none;
+}
+
+.mobile-navigation[open] .mobile-menu-close {
+  display: block;
+}
+
+.social-menu:not([open]) .social-menu-links {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(0.75rem);
+}
+
+.social-menu[open] .social-menu-links {
+  visibility: visible;
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: hover) {
+  .social-menu:hover .social-menu-links {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.travel-documents-choice {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.quote-form-content {
+  pointer-events: none;
+  user-select: none;
+  filter: blur(4px);
+  opacity: 0.5;
+}
+
+#travel-documents-yes:checked ~ .quote-form-content {
+  pointer-events: auto;
+  user-select: auto;
+  filter: none;
+  opacity: 1;
+}
+
+.documents-gate {
+  transition: opacity 300ms ease, visibility 300ms ease;
+}
+
+#travel-documents-yes:checked ~ .documents-gate {
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.documents-no-message {
+  display: none;
+}
+
+#travel-documents-no:checked ~ .documents-gate .documents-no-message {
+  display: block;
+}
+
+#travel-documents-yes:focus-visible ~ .documents-gate label[for="travel-documents-yes"],
+#travel-documents-no:focus-visible ~ .documents-gate label[for="travel-documents-no"] {
+  outline: 2px solid #102a50;
+  outline-offset: 3px;
 }
